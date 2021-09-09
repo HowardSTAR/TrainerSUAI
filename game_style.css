@@ -1,0 +1,20 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.container_for_game {
+    width: 1000px;
+    height: 750px;
+    background-color: #434B4D;
+    border-radius: 30px;
+    margin: 100px auto;
+    position: relative;
+}
+
+.border {
+    width: 900px;
+    height: 650px;
+    background-color: #1C1C1C;
+    position: absolute;
+    margin: 50px 50px;
+}
