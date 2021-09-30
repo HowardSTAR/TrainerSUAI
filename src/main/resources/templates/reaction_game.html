@@ -1,44 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="game_style.css">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Игра на реакцию</title>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css'><link rel="stylesheet" href="./style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+	<meta charset="utf-8">
+	<title>Игра на реакцию</title>
+	<link rel="stylesheet" type="text/css" href="style_secondChance.css">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="timer" id="timer">30</div>
+	<div class="timer" id="timer">10</div> 
+	<div class="container_for_game">
+		<div class="border">
 
-    <div class="container_for_game">
-        <div class="border">
-            <div class="result" id="result">
-                <div class="result_title" id="result_title">Your resulte</div>
-                <div class="score" id="score"><p id="score_p"></p></div>
-            <div class="liquid-button" onclick="beginGame(this)" id="liquid-button">
-                <svg class="liquid-button"
-                data-text="Start"
-                data-force-factor="0.1"
-                data-layer-1-viscosity="0.5"
-                data-layer-2-viscosity="0.4"
-                data-layer-1-mouse-force="400"
-                data-layer-2-mouse-force="500"
-                data-layer-1-force-limit="1"
-                data-layer-2-force-limit="2"
-                data-color1="#FFF500"
-                data-color2="#20D8F9"
-                data-color3="#20D8F9">
-           </svg>
-            </div> <!--Кнопка начала игры-->
-            <div class="square" onclick="square(this)" id="square"></div> <!--Квадрат-->
-            </div> <!--Результат-->
-        </div> <!--Граница-->
-    </div> <!--Контейнер для игры-->
+			<div class="result" id="result">
+				<div class="result_title" id="result_title">
+				<div id="result_title_p">Ваш результат</div></div>
+				<div class="score" id="score"><p id="score_p"></p></div>
+			</div><!--Результат-->
 
-    <script type="text/javascript">
-            let timer_var = 30;
+			<div class="start_btn" onclick="beginGame(this)" onclick="timer(this)" id="start_btn">Старт</div><!--Кнопка начала игры-->
+			<div class="square" onclick="square(this)" id="square"></div><!--Квадрат-->
+		</div><!--Граница-->
+	</div><!--Контейнер для игры-->
+
+	<script type="text/javascript">
+		 let timer_var = 10;
 
             let k = 0;
 
@@ -51,7 +36,7 @@
 
             let inter = setInterval(timer, 1000);
 
-            function timer(){
+            function timer() {
                 if (k > 0)
                     timer_var--;
 
@@ -67,22 +52,24 @@
                     let result = number / 30;
                     document.getElementById("score_p").innerHTML = result;
                     document.getElementById("square").style.display = "none";
-                    document.getElementById("square").style.display = "x";
-                    document.getElementById("square").style.display = "y";
+                    document.getElementById("square").style.left = "x";
+                    document.getElementById("square").style.top = "y";
 
                 }
             }
 
-            function beginGame(){
+            function beginGame() {
                 if (k == 0) {
                     k++;
 
                     sqr++;
                 }
 
-                document.getElementById("liquid-button").style.display = "none";
+                
+                document.getElementById("start_btn").style.display = "none";
 
-                document.getElementById("square").style.top = "block";
+                
+                document.getElementById("square").style.display = "block";
             }
 
             function square() {
@@ -92,10 +79,9 @@
                 number++;
 
                 document.getElementById("square").style.left = x + "px";
-                document.getElementById("square").style.left = y + "px";
+                document.getElementById("square").style.top = y + "px";
             }
-    </script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.4/dat.gui.min.js'></script><script  src="./script.js"></script>
+	</script>
 
 </body>
 </html>
