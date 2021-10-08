@@ -18,7 +18,7 @@
     <description> </description>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>16</java.version>
     </properties>
 
     <dependencies>
@@ -46,6 +46,12 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mustache -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mustache</artifactId>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -66,13 +72,13 @@
 
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+<!--    <build>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+<!--    </build>-->
 
 </project>

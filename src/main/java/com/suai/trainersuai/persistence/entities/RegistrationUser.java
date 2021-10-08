@@ -35,4 +35,32 @@ public class RegistrationUser {
     @Column(name = "Users_password")
     private String password;
 
+    public RegistrationUser() {
+    }
+
+    @Override
+    public String toString() {
+        return "RegistrationUser{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", thirdName='" + thirdName + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", info='" + info + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
+    public RegistrationUser(String name, String secondName, String thirdName, String email, String phone, String info, String avatar, String password) {
+        this.name = name;
+        this.secondName = secondName;
+        this.thirdName = thirdName;
+        this.email = email;
+        this.phone = phone;
+        this.info = info;
+        this.avatar = avatar;
+        this.password = password;
+    }
 }
