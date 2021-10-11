@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Игра на реакцию</title>
+	<link rel="stylesheet" type="text/css" href="style_secondChance.css">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div class="timer" id="timer">10</div> 
+	<div class="container_for_game">
+		<div class="border">
+            <div class="header1"></div>
+            <!--Поле игры-->
+                <div class="whiteSpace">
+                    <div class="result" id="result">
+                        <div class="result_title" id="result_title">
+                        <div id="result_title_p">Ваш результат</div></div>
+                        <div class="score" id="score"><p id="score_p"></p></div>
+                    </div><!--Результат-->
+        
+                    <div class="start_btn" onclick="beginGame(this)" onclick="timer(this)" id="start_btn">Старт</div><!--Кнопка начала игры-->
+                    <div class="square" onclick="square(false)" id="square"></div>
+                </div>
+            <div class="footer1"></div>
+            <div>
+
+            </div>
+		</div><!--Граница-->
+	</div><!--Контейнер для игры-->
+
+	<script type="text/javascript">
+		 let timer_var = 10;
+
+           
+            let k = 0;
+
+            let number = 0;
+
+            let sqr = 0;
+
+            let x = 45;
+            let y = 45;
+
+            const inter = setInterval(timer, 1000);
+
+            function timer() {
+                if (k > 0)
+                    timer_var--;
+
+                if (timer_var >= 0)
+
+                    document.getElementById("timer").innerHTML = timer_var;
+                else {
+                    document.getElementById("timer").innerHTML = "Конец игры";
+                    clearInterval(inter);
+                    document.getElementById("square").style.display = "none";
+                    document.getElementById("result").style.display = "block";
+                    document.getElementById("result_title").style.display = "block";
+                    let result = number / 30;
+                    document.getElementById("score_p").innerHTML = result;
+                    document.getElementById("square").style.display = "none";
+                    document.getElementById("square").style.left = "x";
+                    document.getElementById("square").style.top = "y"; 
+
+                }
+            }
+
+            function beginGame() {
+                if (k == 0) {
+                    k++;
+
+                    sqr++;
+                }
+
+                
+                document.getElementById("start_btn").style.display = "none";
+
+                square(true);
+               
+                document.getElementById("square").style.display = "block";
+            }
+
+           
+            function square(isStart) {
+                x = Math.random() * (650 - 65);
+                y = Math.random() * (400 - 65);
+
+                
+                if (!isStart) number++;
+
+                document.getElementById("square").style.left = x + "px";
+                document.getElementById("square").style.top = y + "px";
+            }
+	</script>
+
+</body>
+</html>

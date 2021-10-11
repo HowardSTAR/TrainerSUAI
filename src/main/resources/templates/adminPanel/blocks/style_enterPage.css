@@ -1,0 +1,80 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+/*Контейнер для игры*/
+
+.container_for_game {
+    width: 750px;
+    height: 500px;
+
+    background-color: #696969;
+
+    border-radius: 40px;
+
+    margin: 25px auto;
+
+    position: relative;
+
+    border-style: solid;
+}
+
+/*Граница*/
+
+.border {
+    width: 680px;
+    height: 430px;
+
+    background-color: #fffcf0;
+
+    position: absolute;
+
+    margin: 35px 35px;
+
+    border-style: solid;
+
+    border-radius: 40px;
+}
+
+/*Кнопки входа и регистрации*/
+
+.enter_btn {
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+
+    margin: 175px 235px 25px 235px;
+
+    background-color: #696969;;
+
+    max-width: 200px;
+
+    padding: 10px 5px 10px 5px;
+
+    border-radius: 15px;
+
+    cursor: pointer;
+
+    border-style: inset;
+}
+
+.reg_btn {
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+
+    margin: 25px 235px 50px 235px;;
+
+    background-color: #696969;;
+
+    max-width: 200px;
+
+    padding: 10px 5px 10px 5px;
+
+    border-radius: 15px;
+
+    cursor: pointer;
+
+    border-style: outset;
+}
