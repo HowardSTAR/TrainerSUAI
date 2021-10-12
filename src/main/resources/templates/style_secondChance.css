@@ -1,0 +1,119 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+/*Контейнер для игры*/
+
+.container_for_game {
+    width: 750px;
+    height: 500px;
+
+    background-color: #696969;
+
+    border-radius: 40px;
+
+    margin: 25px auto;
+
+    position: relative;
+
+    border-style: solid;
+}
+
+/*Граница*/
+
+.border {
+    width: 680px;
+    height: 430px;
+
+    background-color: #F5F5F5;
+
+    position: absolute;
+
+    margin: 35px 35px;
+
+    border-style: solid;
+
+    border-radius: 40px;
+}
+
+/*Кнопка начала игры*/
+
+.start_btn {
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+
+    margin: 200px auto;
+
+    background-color: #696969;;
+
+    max-width: 100px;
+
+    padding: 10px 5px 10px 5px;
+
+    border-radius: 15px;
+
+    cursor: pointer;
+}
+
+/*Таймер*/
+
+.timer {
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: bold;
+
+    text-align: center;
+
+    margin-top: 100px;
+}
+
+
+/*Квадрат*/
+
+.square {
+    display: none;
+
+    width: 50px;
+    height: 50px;
+
+    background-color: #ddd;
+
+    position: absolute;
+
+    left: 15px;
+    top: 15px;
+
+    border-radius: 25px;
+}
+
+/*Результат*/
+
+.result {
+    display: none;
+
+    position: absolute;
+
+    margin-left: 203.5px;
+    margin-top: 150px;
+}
+.result_title {
+    display: none;
+
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: bold;
+}
+.score {
+    text-transform: uppercase;
+
+    font-size: 25px;
+    font-weight: bold;
+}
+#score_p {
+    text-align: center;
+    margin: 0;
+}
+#result_title_p {
+    text-align: center;
+}
