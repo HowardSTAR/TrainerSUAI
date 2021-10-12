@@ -1,4 +1,7 @@
 package com.suai.trainersuai.persistence.repositories;
 
-public interface UserRepository {
+import com.suai.trainersuai.persistence.entities.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRepository extends JpaRepository<User, Long> {
 }

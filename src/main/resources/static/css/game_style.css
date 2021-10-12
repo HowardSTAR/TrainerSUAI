@@ -1,0 +1,61 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    color: #F5F5F5;
+}
+
+/*Контейнер игровой зоны*/
+.container_for_game {
+    width: 1600px;
+    height: 900px;
+    background-color: #434B4D;
+    border-radius: 30px;
+    margin: 300px auto;
+    position: relative;
+}
+
+/*Граница*/
+.border {
+    width: 1500px;
+    height: 800px;
+    border-radius: 30px;
+    background-color: #1C1C1C;
+    position: absolute;
+    margin: 50px 50px;
+}
+
+/*Кнопка начла игры*/
+.button_start {
+    width: 100px;
+    height: 25px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #979797;
+    margin: 400px auto;
+    cursor: pointer;
+    padding: 10px 5px;
+}
+
+/*Таймер*/
+.timer {
+    text-transform: uppercase;
+    font-size: 50px;
+    color: black;
+    font-weight: bold;
+
+    text-align: center;
+
+    margin-top: 200px;
+}
+
+/*Квадрат*/
+.square {
+    display: none;
+
+    width: 50px;
+    height: 50px;
+
+    background-color: black;
+}
