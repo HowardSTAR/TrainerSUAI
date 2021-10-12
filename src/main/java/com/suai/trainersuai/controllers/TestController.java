@@ -9,11 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.validation.Valid;
 import java.util.Map;
 
 
@@ -28,14 +26,14 @@ public class TestController {
         return "index" ;
     }
 
-    @GetMapping("/forma")
+    @GetMapping("/regist")
     public String registration (Model model) {
 //        RegistrationUser regUser = new RegistrationUser();
         model.addAttribute("regUser", new RegistrationUser());
-        return "forma" ;
+        return "regist";
     }
 
-    @PostMapping("/forma")
+    @PostMapping("/regist")
     public String actionReg(@RequestParam String name,
                             @RequestParam String secondName,
                             @RequestParam String thirdName,
