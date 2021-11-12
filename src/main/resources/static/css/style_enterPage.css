@@ -124,7 +124,6 @@ body{
 }
 
 #toRegister {
-    background: url("img/vertical_cloth.png") repeat left top;
     height: 100%;
     min-height: 400px;
     display: none;
@@ -138,6 +137,8 @@ body{
     border-radius: 5px;
     box-shadow: 3px 3px 10px #333;
     padding: 15px;
+    max-height: 350px;
+    overflow: scroll;
 }
 
 #toRegister h2 {
@@ -153,7 +154,9 @@ body{
     text-align: center;
 }
 
-#toRegister input[type="text"], 
+#toRegister input[type="text"],
+#toRegister input[type="tel"],
+#toRegister input[type="email"],
 #toRegister input[type="password"],
 #toRegister button {
     width: 80%;
@@ -165,6 +168,8 @@ body{
 }
       
 #toRegister input[type="text"],
+#toRegister input[type="tel"],
+#toRegister input[type="email"],
 #toRegister input[type="password"] {
     border: 1px solid #bbb;
     padding: 0 0 0 10px;
@@ -187,3 +192,36 @@ body{
     cursor: pointer;
     transition: box-shadow .4s ease;
 }
+
+/* блок настройки скрола*/
+::-webkit-scrollbar-button {
+    background-image:url('');
+    background-repeat:no-repeat;
+    width:5px;
+    height:0px
+    }
+    
+    ::-webkit-scrollbar-track {
+    background-color:#ecedee
+    }
+    
+    ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    background-color:#a3a3a3;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover{
+    background-color:#5c5c5c;
+    }
+    
+    ::-webkit-resizer{
+    background-image:url('');
+    background-repeat:no-repeat;
+    width:4px;
+    height:0px
+    }
+    
+    ::-webkit-scrollbar{
+    width: 4px;
+    }
