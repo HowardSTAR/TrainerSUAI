@@ -4,6 +4,7 @@ import com.suai.trainersuai.persistence.entities.RegistrationUser;
 
 import com.suai.trainersuai.persistence.entities.User;
 import com.suai.trainersuai.persistence.repositories.RegistartionRepository;
+import com.suai.trainersuai.persistence.to.UserToRating;
 import com.suai.trainersuai.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.util.List;
 
 
 @Controller
@@ -69,6 +71,14 @@ public class TestController {
         System.out.println("userResult = " + userResult);
 
         return "redirect:";
+    }
+
+    @GetMapping("/rating")
+    public String rating(Model model) {
+
+        List<UserToRating> userRating = userService.getAllRating();
+        model.addAttribute("userRating", userRating);
+        return "rating";
     }
 
 }
