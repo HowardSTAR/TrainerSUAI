@@ -1,9 +1,8 @@
 package com.suai.trainersuai.controllers;
 
-import com.suai.trainersuai.persistence.entities.RegistrationUser;
-
 import com.suai.trainersuai.persistence.entities.User;
-import com.suai.trainersuai.persistence.repositories.RegistartionRepository;
+
+import com.suai.trainersuai.persistence.entities.UserRating;
 import com.suai.trainersuai.persistence.to.UserToRating;
 import com.suai.trainersuai.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 import java.util.List;
 
+import static com.suai.trainersuai.util.SecurityUtil.*;
+
 
 @Controller
 public class TestController {
@@ -23,36 +24,11 @@ public class TestController {
     @Autowired
     private UserService userService;
 
-
-    @GetMapping("/enterPage")
-    public String enterPageLoad(Model model) {
-        System.out.println("enterPage GET");
-        RegistrationUser registrationUser = new RegistrationUser();
-        model.addAttribute("registrationUser", registrationUser);
-        return "enterPage";
+    @GetMapping("/index")
+    public String mainPage() {
+        return "index";
     }
 
-    @PostMapping("/enterPage")
-    public String registrationEterPage(RegistrationUser registrationUser,
-                                       @RequestParam("action") String action) {
-        System.out.println("enterPage POST registr");
-        System.out.println("registrUser = "+registrationUser);
-        System.out.println("action = " + action);
-
-        if (action.equals("registr")) {
-            RegistrationUser saveUser = userService.save(registrationUser);
-
-            System.out.println("saveUser = "+saveUser);
-
-            System.out.println("SAVE");
-        } else {
-            if (!userService.isLoginUser(registrationUser)) {
-                System.out.println("loginUser false");
-                return "enterPage";
-            }
-        }
-        return "redirect:/reaction_game";
-    }
 
     @GetMapping("/reaction_game")
     public String reaction (Model model) {
@@ -66,7 +42,7 @@ public class TestController {
         System.out.println("POST result");
         System.out.println("result = "+myPostVar);
 
-        User userResult = userService.saveResult(myPostVar);
+        UserRating userResult = userService.saveResult(myPostVar);
 
         System.out.println("userResult = " + userResult);
 
@@ -79,6 +55,31 @@ public class TestController {
         List<UserToRating> userRating = userService.getAllRating();
         model.addAttribute("userRating", userRating);
         return "rating";
+    }
+
+    @GetMapping("/editFormUser")
+    public String editFormUser(Model model) {
+        if (authUserId() == 0) {
+            System.out.println("Пользователь не зарегистрирован");
+            return "enterPage";
+        }
+
+        User user = userService.getUserById(authUserId());
+        System.out.println("User: "+user);
+        model.addAttribute("user", user);
+
+        return "editFormUser";
+    }
+
+    @PostMapping("/editFormUser")
+    public String edtiFormUserChange(User user) {
+
+        user.setId(authUserId());
+
+
+        System.out.println(userService.save(user));
+
+        return "index";
     }
 
 }

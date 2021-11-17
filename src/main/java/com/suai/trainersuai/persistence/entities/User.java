@@ -3,29 +3,65 @@ package com.suai.trainersuai.persistence.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Users_results")
+@Table(name = "Reg_inf")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "Session_id")
+    @Column(name = "Users_ssid")
     private Long id;
 
-    @Column(name = "Player_statistics")
-    private int stat;
+    @Column(name = "Users_name")
+    private String name;
 
-    @Column(name = "Game_difficulty_lvl")
-    private String lvl;
+    @Column(name = "Users_second_name")
+    private String secondName;
 
-    @Column(name = "Users_ssid")
-    private long idRegistration;
+    @Column(name = "Users_third_name")
+    private String thirdName;
 
-    public User() {}
+    @Column(name = "Users_email")
+    private String email;
 
-    public User(int stat, String level, long userId) {
-        this.stat = stat;
-        this.lvl = level;
-        this.idRegistration = userId;
+    @Column(name = "Users_telephone_number")
+    private String phone;
+
+    @Column(name = "Users_special_info")
+    private String info;
+
+    @Column(name = "Users_avatar")
+    private String avatar;
+
+    @Column(name = "Users_password")
+    private String password;
+
+    public User() {
+    }
+
+    @Override
+    public String toString() {
+        return "RegistrationUser{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", thirdName='" + thirdName + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", info='" + info + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
+    public User(String name, String secondName, String thirdName, String email, String phone, String info, String avatar, String password) {
+        this.name = name;
+        this.secondName = secondName;
+        this.thirdName = thirdName;
+        this.email = email;
+        this.phone = phone;
+        this.info = info;
+        this.avatar = avatar;
+        this.password = password;
     }
 
     public Long getId() {
@@ -36,39 +72,72 @@ public class User {
         this.id = id;
     }
 
-    public int getStat() {
-        return stat;
+    public String getName() {
+        return name;
     }
 
-    public void setStat(int stat) {
-        this.stat = stat;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLvl() {
-        return lvl;
+    public String getSecondName() {
+        return secondName;
     }
 
-    public void setLvl(String lvl) {
-        this.lvl = lvl;
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
     }
 
-    public long getIdRegistration() {
-        return idRegistration;
+    public String getThirdName() {
+        return thirdName;
     }
 
-    public void setIdRegistration(long idRegistration) {
-        this.idRegistration = idRegistration;
+    public void setThirdName(String thirdName) {
+        this.thirdName = thirdName;
     }
 
+    public String getEmail() {
+        return email;
+    }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", stat=" + stat +
-                ", lvl='" + lvl + '\'' +
-                ", idRegistration=" + idRegistration +
-                '}';
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isNew() {
+        return id == null;
     }
 
 }

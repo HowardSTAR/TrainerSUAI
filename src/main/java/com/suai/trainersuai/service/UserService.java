@@ -1,7 +1,7 @@
 package com.suai.trainersuai.service;
 
-import com.suai.trainersuai.persistence.entities.RegistrationUser;
 import com.suai.trainersuai.persistence.entities.User;
+import com.suai.trainersuai.persistence.entities.UserRating;
 import com.suai.trainersuai.persistence.repositories.RegistartionRepository;
 import com.suai.trainersuai.persistence.repositories.UserRepository;
 import com.suai.trainersuai.persistence.to.UserToRating;
@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,31 +28,46 @@ public class UserService {
     @Autowired
     private UserRepository repositoryResult;
 
+    @PersistenceContext
+    EntityManager em;
+
     @Transactional
-    public RegistrationUser save(RegistrationUser user) {
-        RegistrationUser userSave = repository.save(user);
-        setAuthUserId(userSave.getId());
-        return userSave;
+    public User save(User user) {
+
+        System.out.println("User in service: "+user);
+
+            if (user.isNew()) {
+                em.persist(user);
+                setAuthUserId(user.getId());
+                return user;
+
+            } else {
+                user.setPassword(getUserById(authUserId()).getPassword());
+
+                System.out.println("User in service set password: "+user);
+
+                return em.merge(user);
+            }
     }
 
     public Long getByEmail(String email) {
-        RegistrationUser userGet = repository.findByEmail(email);
+        User userGet = repository.findByEmail(email);
         setAuthUserId(userGet.getId());
         return userGet.getId();
     }
 
     @Transactional
-    public User saveResult(float result) {
+    public UserRating saveResult(float result) {
         authUserId();
         int resultProcent = Math.round(result * 100);
-        User userResult = new User(resultProcent, null, authUserId());
+        UserRating userResult = new UserRating(resultProcent, null, authUserId());
         return repositoryResult.save(userResult);
     }
 
-    public boolean isLoginUser(RegistrationUser user) {
+    public boolean isLoginUser(User user) {
 
         try {
-            RegistrationUser userGet = repository.findByEmail(user.getEmail());
+            User userGet = repository.findByEmail(user.getEmail());
             if (userGet.getPassword().equals(user.getPassword())) {
                 setAuthUserId(userGet.getId());
                 return true;
@@ -65,17 +82,17 @@ public class UserService {
     }
 
     public List<UserToRating> getAllRating() {
-        List<User> users = repositoryResult.findAll();
+        List<UserRating> users = repositoryResult.findAll();
         List<UserToRating> userRating = new ArrayList<>();
         Map<Long, Integer> map = getMapRating(users);
 
         System.out.println("MAP: "+map);
 
-        RegistrationUser userTemp;
-        User userRatingTemp;
+        User userTemp;
+        UserRating userRatingTemp;
 
         for (Map.Entry<Long, Integer> entry : map.entrySet()) {
-            userTemp = getRegistrationUserById(entry.getKey());
+            userTemp = getUserById(entry.getKey());
             userRating.add(new UserToRating(
                     userTemp.getName(),
                     userTemp.getSecondName(),
@@ -89,10 +106,10 @@ public class UserService {
         return userRating;
     }
 
-    private Map<Long, Integer> getMapRating(List<User> users) {
+    private Map<Long, Integer> getMapRating(List<UserRating> users) {
         Map<Long, Integer> map = new HashMap<>();
 
-        for (User us : users) {
+        for (UserRating us : users) {
             try {
                 int value = map.get(us.getIdRegistration());
                 System.out.println("value = " +value);
@@ -106,9 +123,12 @@ public class UserService {
         return map;
     }
 
-    public RegistrationUser getRegistrationUserById(long id) {
+
+
+    public User getUserById(long id) {
         return repository.findById(id);
     }
+
 
 
 }

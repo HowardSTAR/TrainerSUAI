@@ -17,7 +17,7 @@
 						<div class="login-wr">
 							<h2>Вход</h2>
 							<form method="post">
-								<div th:object="${registrationUser}"  class="form" >
+								<div th:object="${user}"  class="form" >
 <!--									<input type="text" placeholder="Пользователь" name="name" th:field="*{name}">-->
 
 									<input type="text" placeholder="Email" th:field="*{email}">
@@ -40,7 +40,7 @@
 						<div class="register-wr">
 							<h2> Регистрация </h2>
 							<form method="post">
-								<div th:object="${registrationUser}"  class="form">
+								<div th:object="${user}"  class="form">
 									<input type="text" placeholder="Фамилия" th:field="*{name}" name="user">
 									<input type="text" placeholder="Имя" th:field="*{secondName}">
 									<input type="text" placeholder="Отчество" th:field="*{thirdName}">

@@ -1,13 +1,12 @@
 package com.suai.trainersuai.persistence.repositories;
 
-import com.suai.trainersuai.persistence.entities.RegistrationUser;
+import com.suai.trainersuai.persistence.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 
-public interface RegistartionRepository extends JpaRepository<RegistrationUser, Long> {
+public interface RegistartionRepository extends JpaRepository<User, Long> {
 
-    RegistrationUser findByEmail(String email);
+    User findByEmail(String email);
 
-    RegistrationUser findById(long id);
+    User findById(long id);
 
 }
