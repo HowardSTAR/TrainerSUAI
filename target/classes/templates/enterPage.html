@@ -19,7 +19,8 @@
 							<form method="post">
 								<div th:object="${registrationUser}"  class="form" >
 <!--									<input type="text" placeholder="Пользователь" name="name" th:field="*{name}">-->
-									<input type="email" placeholder="Email" th:field="*{email}">
+
+									<input type="text" placeholder="Email" th:field="*{email}">
 									<input type="password" placeholder="Пароль" th:field="*{password}">
 									<input type="hidden" name="action" value="login">
 	<!--								<button onclick="window.location.href='../gamePage/secondChanse (1).html';"> Авторизация </button>-->
@@ -77,10 +78,6 @@
 
 </script>
 
-<script type="text/javascript">
-	let exceptionEnter = document.getElementById("exceptionEnter");
-	console.log('exceptionEnter = '+exceptionEnter);
-</script>
 
 </body>
 </html>

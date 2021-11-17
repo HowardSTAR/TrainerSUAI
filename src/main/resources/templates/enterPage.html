@@ -20,7 +20,7 @@
 								<div th:object="${registrationUser}"  class="form" >
 <!--									<input type="text" placeholder="Пользователь" name="name" th:field="*{name}">-->
 
-									<input type="email" placeholder="Email" th:field="*{email}">
+									<input type="text" placeholder="Email" th:field="*{email}">
 									<input type="password" placeholder="Пароль" th:field="*{password}">
 									<input type="hidden" name="action" value="login">
 	<!--								<button onclick="window.location.href='../gamePage/secondChanse (1).html';"> Авторизация </button>-->
@@ -51,7 +51,7 @@
 									<input type="hidden" name="action" value="registr">
 	<!--								<button onclick="window.location.href='../gamePage/secondChanse (1).html';"> Зарегистрироваться </button>-->
 									<button type="submit"> Зарегистрироваться </button>
-									<a onclick="toLogin();"><p> У вас нет аккаунта? Регистрация </p></a>
+									<a onclick="toLogin();"><p> У вас есть аккаунт? Вход </p></a>
 								</div>
 							</form>
 						</div>
