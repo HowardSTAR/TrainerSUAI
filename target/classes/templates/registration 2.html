@@ -8,10 +8,7 @@
 <head>
     <meta charset="utf-8">
     <title>Меню входа</title>
-<!--    <link rel="stylesheet" type="text/css" href="style_enterPage.css">-->
-
-    <link rel="stylesheet" type="text/css" href="./css/style_enterPage.css">
-<!--    <link rel="stylesheet" type="text/css" href="../css/style_enterPage.css">-->
+    <link rel="stylesheet" type="text/css" href="style_enterPage.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -25,20 +22,19 @@
                         <div class="register-wr">
                             <h2> Регистрация </h2>
 <!--\                            <form th:action="@{/save}" th:object="${regUser}" method="post">-->
-\                            <form th:object="${registrationUser}" method="post">
-<!--\                            <form th:action="@{/registration}" th:object="${registrationUser}" method="post">-->
+\                            <form th:action="@{/registration}" th:object="${registrationUser}" method="post">
                                 <div class="form">
-<!--                                <input type="hidden" name="id" th:value="*{id}" />-->
-                                    <input type="text" placeholder="Фамилия" th:field="*{name}">
-<!--                                    <input type="text" placeholder="Имя" th:field="*{secondName}" >-->
-<!--                                    <input type="text" placeholder="Отчество" th:field="*{thirdName}">-->
-                                    <input type="email" placeholder="Ваш email" th:field="*{email}">
-                                    <input type="password" placeholder="Пароль" th:field="*{password}">
-                                    <input type="tel" placeholder="Телефон" th:field="*{phone}">
-                                    <input type="text" placeholder="Университет и направление" th:field="*{info}">
-<!--                                    <button onclick="window.location.href='../gamePage/secondChanse (1).html';"> Зарегистрироваться </button>-->
+                                    <input type="text" placeholder="Фамилия" th:value="${registrationUser.getName()}" value="${name}">
+<!--                                    <input type="text" placeholder="Фамилия" th:value="${registrationUser.getName()}" th:name="${name}" value="${name}">-->
+<!--                                    <input type="text" placeholder="Имя" th:value="${registrationUser.setSecondName()}" th:name="*{name}">-->
+<!--                                    <input type="text" placeholder="Отчество" th:value="${registrationUser.setThirdName()}" th:name="*{name}">-->
+                                    <input type="email" placeholder="Ваш email">
+                                    <input type="password" placeholder="Пароль">
+                                    <input type="tel" placeholder="Телефон">
+                                    <input type="text" placeholder="Университет и направление">
+    <!--                                <button onclick="window.location.href='../gamePage/secondChanse (1).html';"> Зарегистрироваться </button>-->
                                     <button type="submit"> Зарегистрироваться </button>
-                                    <a onclick="toLogin();"><p> У вас нет аккаунта? Регистрация </p></a>
+    <!--                                <a onclick="toLogin();"><p> У вас нет аккаунта? Регистрация </p></a>-->
                                 </div>
                             </form>
                         </div>

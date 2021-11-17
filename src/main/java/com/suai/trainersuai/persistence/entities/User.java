@@ -20,6 +20,14 @@ public class User {
     @Column(name = "Users_ssid")
     private long idRegistration;
 
+    public User() {}
+
+    public User(int stat, String level, long userId) {
+        this.stat = stat;
+        this.lvl = level;
+        this.idRegistration = userId;
+    }
+
     public Long getId() {
         return id;
     }

@@ -2,54 +2,72 @@ package com.suai.trainersuai.controllers;
 
 import com.suai.trainersuai.persistence.entities.RegistrationUser;
 
+import com.suai.trainersuai.persistence.entities.User;
 import com.suai.trainersuai.persistence.repositories.RegistartionRepository;
+import com.suai.trainersuai.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
+import java.text.ParseException;
 
 
 @Controller
 public class TestController {
 
     @Autowired
-    private RegistartionRepository registrator;
+    private UserService userService;
 
-    @GetMapping("/")
-    public String index () {
-        return "index" ;
+    @GetMapping("/enterPage")
+    public String enterPageLoad(Model model) {
+        System.out.println("enterPage GET");
+        RegistrationUser registrationUser = new RegistrationUser();
+        model.addAttribute("registrationUser", registrationUser);
+        return "enterPage";
     }
 
-    @GetMapping("/regist")
-    public String registration (Model model) {
-//        RegistrationUser regUser = new RegistrationUser();
-        model.addAttribute("regUser", new RegistrationUser());
-        return "regist";
+    @PostMapping("/enterPage")
+    public String registrationEterPage(RegistrationUser registrationUser,
+                                       @RequestParam("action") String action) {
+        System.out.println("enterPage POST registr");
+        System.out.println("registrUser = "+registrationUser);
+        System.out.println("action = " + action);
+
+        if (action.equals("registr")) {
+            RegistrationUser saveUser = userService.save(registrationUser);
+
+            System.out.println("saveUser = "+saveUser);
+
+            System.out.println("SAVE");
+        } else {
+            if (!userService.isLoginUser(registrationUser)) {
+                System.out.println("loginUser false");
+                return "enterPage";
+            }
+        }
+        return "redirect:/reaction_game";
     }
 
-    @PostMapping("/regist")
-    public String actionReg(@RequestParam String name,
-                            @RequestParam String secondName,
-                            @RequestParam String thirdName,
-                            @RequestParam String email,
-                            @RequestParam String phone,
-                            @RequestParam String info,
-                            @RequestParam String avatar,
-                            @RequestParam String password,
-                            Map<String, Object> model){
+    @GetMapping("/reaction_game")
+    public String reaction (Model model) {
+        System.out.println("reaction_game - GET");
 
-        RegistrationUser regUser = new RegistrationUser(name, secondName, thirdName, email, phone, info, avatar, password);
-        System.out.println("!!!!!!!!!!!!!!!!!!!!  " + regUser);
-        model.put("regUser", new RegistrationUser());
-
-        registrator.save(regUser);
-
-        return "index" ;
+        return "reaction_game";
     }
+
+    @PostMapping("/reaction_game")
+    public String getResult(@RequestParam(value = "myPostVar") Float myPostVar) throws ParseException {
+        System.out.println("POST result");
+        System.out.println("result = "+myPostVar);
+
+        User userResult = userService.saveResult(myPostVar);
+
+        System.out.println("userResult = " + userResult);
+
+        return "redirect:";
+    }
+
 }
