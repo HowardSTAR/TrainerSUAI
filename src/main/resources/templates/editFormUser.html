@@ -3,12 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Форма редактирования</title>
-<!--        <link rel="stylesheet" type="text/css" href="./css/style_enterPage.css">-->
-        <link rel="stylesheet" type="text/css" href="../static/css/style_enterPage.css">
+        <link rel="stylesheet" type="text/css" href="./css/style_enterPage.css">
+<!--        <link rel="stylesheet" type="text/css" href="../static/css/style_enterPage.css">-->
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
 </head>
 <body>
+
+<!--    перемещение по страницам    -->
+<div align="center">
+    <a href="/reaction_game">Игра</a>
+    <a href="/rating">Рейтинг</a>
+    <span th:text="         ${userName}"></span>
+    <a href="/editFormUser">Профиль</a>
+    <a href="/exit">Выход</a>
+</div>
+
 
 <a href="/index"></a>
     <div class="container_for_game">
@@ -20,17 +30,21 @@
                                 <h2> Форма редактирования </h2>
                                 <form method="post">
                                     <div th:object="${user}"  class="form">
+                                        фамилия <br>
                                         <input type="text" th:field="*{name}">
+                                        <br>имя  <br>
                                         <input type="text" th:field="*{secondName}">
+                                        <br>отчество<br>
                                         <input type="text" th:field="*{thirdName}">
+                                        <br>email<br>
                                         <input type="email" th:field="*{email}">
-                                        <input type="password" th:field="*{password}">
+                                        <br>пароль<br>
+                                        <input type="password" th:field="*{password}" placeholder="изменить пароль">
+                                        <br>телефон<br>
                                         <input type="tel" th:field="*{phone}">
+                                        <br>университет и направление<br>
                                         <input type="text" th:field="*{info}">
-                                        <!--								<button onclick="window.location.href='../gamePage/secondChanse (1).html';"> Зарегистрироваться </button>-->
                                         <button type="submit"> Изменить </button>
-<!--                                        <a onclick="toLogin();"><p> У вас есть аккаунт? Вход </p></a>-->
-                                        <a href="/enterPage" ><p> У вас есть аккаунт? Вход </p></a>
                                     </div>
                                 </form>
                             </div>
@@ -47,6 +61,7 @@
     // var login = document.getElementById('toLogin');
     var register = document.getElementById('toRegister');
        register.style.display = 'block';
+
 
 </script>
 

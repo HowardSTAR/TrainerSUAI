@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import static com.suai.trainersuai.util.SecurityUtil.*;
+
 @Controller
 public class RegistrationController {
 
@@ -20,6 +22,7 @@ public class RegistrationController {
         System.out.println("enterPage GET");
         User user = new User();
         model.addAttribute("user", user);
+
         return "enterPage";
     }
 
@@ -40,10 +43,17 @@ public class RegistrationController {
             if (!userService.isLoginUser(user)) {
 
                 System.out.println("loginUser false");
+                setAuthUserId(userService.getByEmail(user.getEmail()));
                 return "enterPage";
             }
         }
         return "redirect:/reaction_game";
+    }
+
+    @GetMapping("/exit")
+    public String exit() {
+        setAuthUserId(0);
+        return "redirect:/enterPage";
     }
 
 }
