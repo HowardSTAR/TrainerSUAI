@@ -19,6 +19,7 @@
 							<form method="post">
 								<div th:object="${registrationUser}"  class="form" >
 <!--									<input type="text" placeholder="Пользователь" name="name" th:field="*{name}">-->
+
 									<input type="email" placeholder="Email" th:field="*{email}">
 									<input type="password" placeholder="Пароль" th:field="*{password}">
 									<input type="hidden" name="action" value="login">
@@ -76,6 +77,7 @@
 	}
 
 </script>
+
 
 </body>
 </html>

@@ -60,6 +60,7 @@ public class User {
         this.idRegistration = idRegistration;
     }
 
+
     @Override
     public String toString() {
         return "User{" +

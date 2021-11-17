@@ -135,4 +135,5 @@ public class RegistrationUser {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

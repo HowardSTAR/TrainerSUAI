@@ -20,7 +20,6 @@ public class UserService {
     @Autowired
     private UserRepository repositoryResult;
 
-
     @Transactional
     public RegistrationUser save(RegistrationUser user) {
         RegistrationUser userSave = repository.save(user);

@@ -21,6 +21,7 @@ public class TestController {
     @Autowired
     private UserService userService;
 
+
     @GetMapping("/enterPage")
     public String enterPageLoad(Model model) {
         System.out.println("enterPage GET");
