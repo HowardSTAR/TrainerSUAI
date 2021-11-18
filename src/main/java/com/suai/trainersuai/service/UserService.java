@@ -1,8 +1,8 @@
 package com.suai.trainersuai.service;
 
-import com.suai.trainersuai.persistence.entities.User;
-import com.suai.trainersuai.persistence.repositories.UserRepository;
-import com.suai.trainersuai.persistence.repositories.UserRatingRepository;
+import com.suai.trainersuai.model.User;
+import com.suai.trainersuai.repositories.UserRepository;
+import com.suai.trainersuai.repositories.UserRatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,28 +28,26 @@ public class UserService {
     @Transactional
     public User save(User user) {
 
-        System.out.println("User in service: "+user);
-
             if (user.isNew()) {
+//                save User
                 em.persist(user);
                 setAuthUserId(user.getId());
                 return user;
-
             } else {
+//                update User
                 user.setPassword(getUserById(authUserId()).getPassword());
-
-                System.out.println("User in service set password: "+user);
-
                 return em.merge(user);
             }
     }
 
+//    удалить???
     public Long getByEmail(String email) {
         User userGet = repository.findByEmail(email);
         setAuthUserId(userGet.getId());
         return userGet.getId();
     }
 
+//    проверка пользователя по email - login
     public boolean isLoginUserEmail(String email) {
 
         try {
@@ -63,11 +61,10 @@ public class UserService {
         }
     }
 
+//    проверка пароля пользователя - login
     public boolean isLoginUserPassword(String email, String password) {
         User userGet = repository.findByEmail(email);
         if (userGet.getPassword().equals(password) ) {
-//                &&
-//                userGet.getEmail().equals(email)) {
             setAuthUserId(userGet.getId());
             return true;
         }
@@ -76,14 +73,7 @@ public class UserService {
 
 
     public User getUserById(long id) {
-
         return repository.findById(id);
     }
-
-    @Transactional
-    public void deleteUser22() {
-        repository.deleteById(22);
-    }
-
 
 }

@@ -1,6 +1,6 @@
 package com.suai.trainersuai.controllers;
 
-import com.suai.trainersuai.persistence.entities.User;
+import com.suai.trainersuai.model.User;
 import com.suai.trainersuai.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,13 +22,11 @@ public class ProfileUserController {
     public String editFormUser(Model model) {
 
         if (authUserId() == 0) {
-            System.out.println("Вход не выполнен");
+//            "Вход не выполнен"
             return "redirect:/enterPage";
         }
 
         User user = userService.getUserById(authUserId());
-        System.out.println("User: "+user);
-
         userName = user.getName() + " " + user.getSecondName();
 
         model.addAttribute("user", user);
@@ -45,8 +43,7 @@ public class ProfileUserController {
         userName = user.getName() + " " + user.getSecondName();
         model.addAttribute("userName", userName);
 
-
-        System.out.println(userService.save(user));
+        userService.save(user);
 
         return "editFormUser";
     }

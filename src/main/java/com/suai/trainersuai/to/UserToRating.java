@@ -1,4 +1,4 @@
-package com.suai.trainersuai.persistence.to;
+package com.suai.trainersuai.to;
 
 public class UserToRating {
 

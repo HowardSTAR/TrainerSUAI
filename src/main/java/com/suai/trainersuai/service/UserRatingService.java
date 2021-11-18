@@ -1,9 +1,9 @@
 package com.suai.trainersuai.service;
 
-import com.suai.trainersuai.persistence.entities.User;
-import com.suai.trainersuai.persistence.entities.UserRating;
-import com.suai.trainersuai.persistence.repositories.UserRatingRepository;
-import com.suai.trainersuai.persistence.to.UserToRating;
+import com.suai.trainersuai.model.User;
+import com.suai.trainersuai.model.UserRating;
+import com.suai.trainersuai.repositories.UserRatingRepository;
+import com.suai.trainersuai.to.UserToRating;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,12 +33,11 @@ public class UserRatingService {
         return repositoryResult.save(userResult);
     }
 
+//    получение списка объектов UserToRating включающих всех пользователей с максимальным рейтингом
     public List<UserToRating> getAllRating() {
         List<UserRating> users = repositoryResult.findAll();
         List<UserToRating> userRating = new ArrayList<>();
         Map<Long, Integer> map = getMapRating(users);
-
-        System.out.println("MAP: "+map);
 
         User userTemp;
         UserRating userRatingTemp;
@@ -53,11 +52,10 @@ public class UserRatingService {
             ));
         }
 
-        System.out.println("List: "+userRating);
-
         return userRating;
     }
 
+//    получение Map <idUser, max - рейтинг>
     private Map<Long, Integer> getMapRating(List<UserRating> users) {
         Map<Long, Integer> map = new HashMap<>();
 

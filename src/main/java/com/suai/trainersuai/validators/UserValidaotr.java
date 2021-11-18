@@ -1,6 +1,6 @@
-package com.suai.trainersuai.controllers;
+package com.suai.trainersuai.validators;
 
-import com.suai.trainersuai.persistence.entities.User;
+import com.suai.trainersuai.model.User;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -23,6 +23,5 @@ public class UserValidaotr implements Validator {
         ValidationUtils.rejectIfEmpty(errors, "password", "error.password", "Введите пароль");
         ValidationUtils.rejectIfEmpty(errors, "name", "error.name", "Введите фамилию");
         ValidationUtils.rejectIfEmpty(errors, "secondName", "error.secondName", "Введите имя");
-//        ValidationUtils.invokeValidator();
     }
 }

@@ -11,8 +11,6 @@ public class TrainerApplication implements WebMvcConfigurer {
         SpringApplication.run(TrainerApplication.class, args);
     }
 
-
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/js/**").addResourceLocations("classpath:/static/js/");

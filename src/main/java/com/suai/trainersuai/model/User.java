@@ -1,8 +1,9 @@
-package com.suai.trainersuai.persistence.entities;
+package com.suai.trainersuai.model;
 
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 @Entity
 @Table(name = "Reg_inf", uniqueConstraints = {
@@ -27,6 +28,7 @@ public class User {
 
     @Column(name = "Users_email")
     @NonNull
+    @Email
     private String email;
 
     @Column(name = "Users_telephone_number")

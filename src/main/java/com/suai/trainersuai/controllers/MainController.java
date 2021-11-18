@@ -1,9 +1,9 @@
 package com.suai.trainersuai.controllers;
 
-import com.suai.trainersuai.persistence.entities.User;
+import com.suai.trainersuai.model.User;
 
-import com.suai.trainersuai.persistence.entities.UserRating;
-import com.suai.trainersuai.persistence.to.UserToRating;
+import com.suai.trainersuai.model.UserRating;
+import com.suai.trainersuai.to.UserToRating;
 import com.suai.trainersuai.service.UserRatingService;
 import com.suai.trainersuai.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,13 +40,10 @@ public class MainController {
     public String reaction (Model model) {
 
         if (authUserId() == 0) {
-            System.out.println("Вход не выполнен");
+//           Вход не выполнен
             return "redirect:/enterPage";
         }
-
-        System.out.println("reaction_game - GET");
         User user = userService.getUserById(authUserId());
-        System.out.println("Game user: "+user);
         userName = user.getName() + " " + user.getSecondName();
         model.addAttribute("userName", userName);
 
@@ -55,12 +52,8 @@ public class MainController {
 
     @PostMapping("/reaction_game")
     public String getResult(@RequestParam(value = "myPostVar") Float myPostVar) throws ParseException {
-        System.out.println("POST result");
-        System.out.println("result = "+myPostVar);
 
         UserRating userResult = ratingService.saveResult(myPostVar);
-
-        System.out.println("userResult = " + userResult);
 
         return "redirect:";
     }
@@ -69,18 +62,16 @@ public class MainController {
     public String rating(Model model) {
 
         if (authUserId() == 0) {
-            System.out.println("Вход не выполнен");
+//            "Вход не выполнен"
             return "redirect:/enterPage";
         }
 
         List<UserToRating> userRating = ratingService.getAllRating();
         User user = userService.getUserById(authUserId());
-
-        System.out.println("rating user: "+user);
-
         userName = user.getName() + " " + user.getSecondName();
         model.addAttribute("userRating", userRating);
         model.addAttribute("userName", userName);
+
         return "rating";
     }
 

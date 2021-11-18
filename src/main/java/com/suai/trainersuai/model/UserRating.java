@@ -1,4 +1,4 @@
-package com.suai.trainersuai.persistence.entities;
+package com.suai.trainersuai.model;
 
 import javax.persistence.*;
 
