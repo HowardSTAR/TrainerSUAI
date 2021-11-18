@@ -1,20 +1,14 @@
 package com.suai.trainersuai.service;
 
 import com.suai.trainersuai.persistence.entities.User;
-import com.suai.trainersuai.persistence.entities.UserRating;
 import com.suai.trainersuai.persistence.repositories.UserRepository;
 import com.suai.trainersuai.persistence.repositories.UserRatingRepository;
-import com.suai.trainersuai.persistence.to.UserToRating;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import static com.suai.trainersuai.util.SecurityUtil.*;
 
@@ -56,22 +50,28 @@ public class UserService {
         return userGet.getId();
     }
 
-    public boolean isLoginUser(User user) {
+    public boolean isLoginUserEmail(String email) {
 
         try {
-            User userGet = repository.findByEmail(user.getEmail());
-            if (userGet.getPassword().equals(user.getPassword()) &&
-                userGet.getEmail().equals(user.getEmail())) {
-                setAuthUserId(userGet.getId());
+            if (repository.findByEmail(email).getEmail().equals(email)) {
                 return true;
+            } else {
+                return false;
             }
-            return false;
-
         } catch (NullPointerException e) {
-            System.out.println("Нет такого пользователя");
             return false;
         }
+    }
 
+    public boolean isLoginUserPassword(String email, String password) {
+        User userGet = repository.findByEmail(email);
+        if (userGet.getPassword().equals(password) ) {
+//                &&
+//                userGet.getEmail().equals(email)) {
+            setAuthUserId(userGet.getId());
+            return true;
+        }
+        return false;
     }
 
 
@@ -80,6 +80,10 @@ public class UserService {
         return repository.findById(id);
     }
 
+    @Transactional
+    public void deleteUser22() {
+        repository.deleteById(22);
+    }
 
 
 }

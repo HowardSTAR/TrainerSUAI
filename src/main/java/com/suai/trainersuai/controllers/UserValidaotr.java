@@ -19,7 +19,10 @@ public class UserValidaotr implements Validator {
     public void validate(Object target, Errors errors) {
         User user = (User) target;
 
-        ValidationUtils.rejectIfEmpty(errors, "name", "user.name.empty");
-        ValidationUtils.rejectIfEmpty(errors, "password", "user.password.empty");
+        ValidationUtils.rejectIfEmpty(errors, "email", "error.email", "Введите Email");
+        ValidationUtils.rejectIfEmpty(errors, "password", "error.password", "Введите пароль");
+        ValidationUtils.rejectIfEmpty(errors, "name", "error.name", "Введите фамилию");
+        ValidationUtils.rejectIfEmpty(errors, "secondName", "error.secondName", "Введите имя");
+//        ValidationUtils.invokeValidator();
     }
 }

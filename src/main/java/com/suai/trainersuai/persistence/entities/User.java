@@ -1,5 +1,7 @@
 package com.suai.trainersuai.persistence.entities;
 
+import org.springframework.lang.NonNull;
+
 import javax.persistence.*;
 
 @Entity
@@ -24,6 +26,7 @@ public class User {
     private String thirdName;
 
     @Column(name = "Users_email")
+    @NonNull
     private String email;
 
     @Column(name = "Users_telephone_number")

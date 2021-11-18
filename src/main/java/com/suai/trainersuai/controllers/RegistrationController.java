@@ -5,10 +5,13 @@ import com.suai.trainersuai.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.sql.SQLIntegrityConstraintViolationException;
 
 import static com.suai.trainersuai.util.SecurityUtil.*;
@@ -17,57 +20,75 @@ import static com.suai.trainersuai.util.SecurityUtil.*;
 public class RegistrationController {
 
     @Autowired
+    private UserValidaotr userValidaotr;
+
+    @Autowired
     private UserService userService;
 
+    @InitBinder
+    private void initBinder(WebDataBinder binder) {
+        binder.setValidator(userValidaotr);
+    }
+
     @GetMapping("/enterPage")
-    public String enterPageLoad(Model model) {
-        System.out.println("enterPage GET");
-        User user = new User();
-        model.addAttribute("user", user);
+    public String enterPageLoad(@ModelAttribute User user) {
+//        User user = new User();
+//        model.addAttribute("user", user);
 
         return "enterPage";
     }
 
     @PostMapping("/enterPage")
-    public String registrationEterPage(User user,
+    public String registrationEterPage(@ModelAttribute @Valid User user,
+                                       BindingResult bindingResult,
+                                       @RequestParam("email") String email,
+                                       @RequestParam("password") String password,
                                        @RequestParam("action") String action,
-                                       Model model) {
-        System.out.println("enterPage POST registr");
-        System.out.println("registrUser = "+user);
-        System.out.println("action = " + action);
+//                                       Model model,
+                                       final RedirectAttributes redirectAttributes) {
 
-        if (action.equals("registration")) {
-
-            ExceptionAlert isException = new ExceptionAlert(false);
+//        REGISTRATION
+        if (action.equals("isRegistration")) {
             try {
-
-                User saveUser = userService.save(user);
-
-                System.out.println("saveUser = "+saveUser);
-
+                if (bindingResult.hasErrors()) {
+                    addToredirectAttributes(bindingResult, redirectAttributes, user);
+                    return "enterPage";
+                }
+                userService.save(user);
             } catch (Exception e) {
-                System.out.println("Такой Email уже существует");
-                String exception = "Такой Email уже существует";
-//                String isException = "1";
-                isException = new ExceptionAlert(true);
-                model.addAttribute("isException", isException);
-                model.addAttribute("exception", exception);
-                return "enterPage";
+                bindingResult.rejectValue("email", "error.email", "Такой Email уже существует");
+                if (bindingResult.hasErrors()) {
+                    addToredirectAttributes(bindingResult, redirectAttributes, user);
+                    return "enterPage";
+                }
             }
-
-
-
-            System.out.println("SAVE");
         } else {
-            if (!userService.isLoginUser(user)) {
-
-                System.out.println("loginUser false");
-//                setAuthUserId(userService.getByEmail(user.getEmail()));
-                return "enterPage";
+//            LOGIN
+            if (!email.isEmpty() &&
+                !password.isEmpty() &&
+                userService.isLoginUserEmail(email)) {
+                if (userService.isLoginUserPassword(email, password)) {
+                    return "redirect:/reaction_game";
+                } else {
+                    bindingResult.rejectValue("password", "error.password", "Неверный пароль");
+                    addToredirectAttributes(bindingResult, redirectAttributes, user);
+                    return "enterPage";
+                }
+            } else {
+                if (!email.isEmpty() &&
+                    !userService.isLoginUserEmail(email)) {
+                    bindingResult.rejectValue("email", "error.email", "Такого пользователя не существует");
+                    addToredirectAttributes(bindingResult, redirectAttributes, user);
+                    return "enterPage";
+                } else {
+                    addToredirectAttributes(bindingResult, redirectAttributes, user);
+                    return "enterPage";
+                }
             }
         }
-        return "redirect:/reaction_game";
+            return "redirect:/reaction_game";
     }
+
 
     @GetMapping("/exit")
     public String exit() {
@@ -75,17 +96,15 @@ public class RegistrationController {
         return "redirect:/enterPage";
     }
 
+    private RedirectAttributes addToredirectAttributes(BindingResult bindingResult,
+                                                       RedirectAttributes redirectAttributes,
+                                                       User user) {
+        redirectAttributes.getFlashAttributes().clear();
+        redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.customer", bindingResult);
+        redirectAttributes.addFlashAttribute("user", user);
 
-    class ExceptionAlert {
-        private boolean isException;
-
-        public ExceptionAlert(boolean isException) {
-            this.isException = isException;
-        }
-
-        public ExceptionAlert() {
-            this.isException = false;
-        }
+        return redirectAttributes;
     }
+
 
 }
