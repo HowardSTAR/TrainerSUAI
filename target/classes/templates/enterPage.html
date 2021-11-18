@@ -8,6 +8,17 @@
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
+
+<div class="exception" th:if="${isException}">
+	<script type="text/javascript">
+		function exception() {
+			alert('Такой Email уже существует');
+			console.log('Такой Email уже существует');
+		}
+	</script>
+</div>
+
+
 <div class="container_for_game">
 	<div class="border">
 		<div id="toLogin">
@@ -17,7 +28,7 @@
 						<div class="login-wr">
 							<h2>Вход</h2>
 							<form method="post">
-								<div th:object="${registrationUser}"  class="form" >
+								<div th:object="${user}"  class="form" >
 <!--									<input type="text" placeholder="Пользователь" name="name" th:field="*{name}">-->
 
 									<input type="text" placeholder="Email" th:field="*{email}">
@@ -40,7 +51,14 @@
 						<div class="register-wr">
 							<h2> Регистрация </h2>
 							<form method="post">
-								<div th:object="${registrationUser}"  class="form">
+<!--								<div class="exception" th:if="${isException}">-->
+<!--									<script type="text/javascript">-->
+<!--										function exception() {-->
+<!--											alert('Такой Email уже существует')-->
+<!--										}-->
+<!--									</script>-->
+<!--								</div>-->
+								<div th:object="${user}"  class="form">
 									<input type="text" placeholder="Фамилия" th:field="*{name}" name="user">
 									<input type="text" placeholder="Имя" th:field="*{secondName}">
 									<input type="text" placeholder="Отчество" th:field="*{thirdName}">
@@ -48,7 +66,7 @@
 									<input type="password" placeholder="пароль" th:field="*{password}" name="password">
 									<input type="tel" placeholder="Телефон" th:field="*{phone}">
 									<input type="text" placeholder="Университет и направление" th:field="*{info}">
-									<input type="hidden" name="action" value="registr">
+									<input type="hidden" name="action" value="registration">
 	<!--								<button onclick="window.location.href='../gamePage/secondChanse (1).html';"> Зарегистрироваться </button>-->
 									<button type="submit"> Зарегистрироваться </button>
 									<a onclick="toLogin();"><p> У вас есть аккаунт? Вход </p></a>

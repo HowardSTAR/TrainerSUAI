@@ -3,7 +3,10 @@ package com.suai.trainersuai.persistence.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Reg_inf")
+@Table(name = "Reg_inf", uniqueConstraints = {
+                @UniqueConstraint(columnNames = "Users_ssid"),
+                @UniqueConstraint(columnNames = "Users_email")
+      })
 public class User {
 
     @Id

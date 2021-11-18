@@ -40,6 +40,13 @@
 						<div class="register-wr">
 							<h2> Регистрация </h2>
 							<form method="post">
+<!--								<div class="exception" th:if="${isException}">-->
+<!--									<script type="text/javascript">-->
+<!--										function exception() {-->
+<!--											alert('Такой Email уже существует')-->
+<!--										}-->
+<!--									</script>-->
+<!--								</div>-->
 								<div th:object="${user}"  class="form">
 									<input type="text" placeholder="Фамилия" th:field="*{name}" name="user">
 									<input type="text" placeholder="Имя" th:field="*{secondName}">
@@ -48,7 +55,7 @@
 									<input type="password" placeholder="пароль" th:field="*{password}" name="password">
 									<input type="tel" placeholder="Телефон" th:field="*{phone}">
 									<input type="text" placeholder="Университет и направление" th:field="*{info}">
-									<input type="hidden" name="action" value="registr">
+									<input type="hidden" name="action" value="registration">
 	<!--								<button onclick="window.location.href='../gamePage/secondChanse (1).html';"> Зарегистрироваться </button>-->
 									<button type="submit"> Зарегистрироваться </button>
 									<a onclick="toLogin();"><p> У вас есть аккаунт? Вход </p></a>

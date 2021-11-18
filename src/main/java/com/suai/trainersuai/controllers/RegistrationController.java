@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
 import static com.suai.trainersuai.util.SecurityUtil.*;
 
 @Controller
@@ -28,22 +30,39 @@ public class RegistrationController {
 
     @PostMapping("/enterPage")
     public String registrationEterPage(User user,
-                                       @RequestParam("action") String action) {
+                                       @RequestParam("action") String action,
+                                       Model model) {
         System.out.println("enterPage POST registr");
         System.out.println("registrUser = "+user);
         System.out.println("action = " + action);
 
-        if (action.equals("registr")) {
-            User saveUser = userService.save(user);
+        if (action.equals("registration")) {
 
-            System.out.println("saveUser = "+saveUser);
+            ExceptionAlert isException = new ExceptionAlert(false);
+            try {
+
+                User saveUser = userService.save(user);
+
+                System.out.println("saveUser = "+saveUser);
+
+            } catch (Exception e) {
+                System.out.println("Такой Email уже существует");
+                String exception = "Такой Email уже существует";
+//                String isException = "1";
+                isException = new ExceptionAlert(true);
+                model.addAttribute("isException", isException);
+                model.addAttribute("exception", exception);
+                return "enterPage";
+            }
+
+
 
             System.out.println("SAVE");
         } else {
             if (!userService.isLoginUser(user)) {
 
                 System.out.println("loginUser false");
-                setAuthUserId(userService.getByEmail(user.getEmail()));
+//                setAuthUserId(userService.getByEmail(user.getEmail()));
                 return "enterPage";
             }
         }
@@ -54,6 +73,19 @@ public class RegistrationController {
     public String exit() {
         setAuthUserId(0);
         return "redirect:/enterPage";
+    }
+
+
+    class ExceptionAlert {
+        private boolean isException;
+
+        public ExceptionAlert(boolean isException) {
+            this.isException = isException;
+        }
+
+        public ExceptionAlert() {
+            this.isException = false;
+        }
     }
 
 }

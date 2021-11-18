@@ -4,6 +4,7 @@ import com.suai.trainersuai.persistence.entities.User;
 
 import com.suai.trainersuai.persistence.entities.UserRating;
 import com.suai.trainersuai.persistence.to.UserToRating;
+import com.suai.trainersuai.service.UserRatingService;
 import com.suai.trainersuai.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,12 +20,15 @@ import static com.suai.trainersuai.util.SecurityUtil.*;
 
 
 @Controller
-public class TestController {
+public class MainController {
 
     private  String userName = "";
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRatingService ratingService;
 
     @GetMapping("/index")
     public String mainPage() {
@@ -54,7 +58,7 @@ public class TestController {
         System.out.println("POST result");
         System.out.println("result = "+myPostVar);
 
-        UserRating userResult = userService.saveResult(myPostVar);
+        UserRating userResult = ratingService.saveResult(myPostVar);
 
         System.out.println("userResult = " + userResult);
 
@@ -69,7 +73,7 @@ public class TestController {
             return "redirect:/enterPage";
         }
 
-        List<UserToRating> userRating = userService.getAllRating();
+        List<UserToRating> userRating = ratingService.getAllRating();
         User user = userService.getUserById(authUserId());
 
         System.out.println("rating user: "+user);
@@ -80,38 +84,6 @@ public class TestController {
         return "rating";
     }
 
-    @GetMapping("/editFormUser")
-    public String editFormUser(Model model) {
-
-        if (authUserId() == 0) {
-            System.out.println("Вход не выполнен");
-            return "redirect:/enterPage";
-        }
-
-        User user = userService.getUserById(authUserId());
-        System.out.println("User: "+user);
-
-        userName = user.getName() + " " + user.getSecondName();
-
-        model.addAttribute("user", user);
-        model.addAttribute("userName", userName);
-
-        return "editFormUser";
-    }
-
-    @PostMapping("/editFormUser")
-    public String edtiFormUserChange(User user, Model model) {
-
-        user.setId(authUserId());
-
-        userName = user.getName() + " " + user.getSecondName();
-        model.addAttribute("userName", userName);
-
-
-        System.out.println(userService.save(user));
-
-        return "editFormUser";
-    }
 
 
 }
