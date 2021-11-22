@@ -18,7 +18,7 @@
     <description> </description>
 
     <properties>
-        <java.version>16</java.version>
+        <java.version>14</java.version>
     </properties>
 
     <dependencies>
@@ -47,10 +47,10 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mustache -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-mustache</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-mustache</artifactId>-->
+<!--        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
         <dependency>

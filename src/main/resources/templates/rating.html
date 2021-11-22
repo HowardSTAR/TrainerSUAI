@@ -1,0 +1,38 @@
+!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Рейтинг</title>
+<!--    <link rel="stylesheet" type="text/css" href="./css/style_enterPage.css">-->
+<!--    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">-->
+</head>
+<body>
+
+<!--    перемещение по страницам    -->
+<div align="center">
+    <a href="/reaction_game">Игра</a>
+    <a href="/rating">Рейтинг</a>
+    <span th:text="         ${userName}"></span>
+    <a href="/editFormUser">Профиль</a>
+    <a href="/exit">Выход</a>
+</div>
+
+    <h1>Рейтинг</h1>
+
+    <table th:object="${userRating}">
+        <tr>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Рейтинг</th>
+        </tr>
+        <tr th:each="list : ${userRating}">
+            <td th:utext="${list.firstName}"></td>
+            <td th:utext="${list.secondName}"></td>
+            <td th:utext="${list.thirdName}"></td>
+            <td th:utext="${list.rating}"></td>
+        </tr>
+    </table>
+
+</body>
+</html>

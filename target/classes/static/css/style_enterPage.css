@@ -1,0 +1,227 @@
+html, body {
+    padding: 0;
+    margin-top: 80px;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}
+/*Контейнер для игры*/
+
+.container_for_game {
+    width: 750px;
+    height: 500px;
+
+    background-color: #696969;
+
+    border-radius: 40px;
+
+    margin: 25px auto;
+
+    position: relative;
+
+    border-style: solid;
+}
+
+/*Граница*/
+
+.border {
+    width: 680px;
+    height: 430px;
+
+    background-color: #DCDCDC;
+
+    position: absolute;
+
+    margin: 35px 35px;
+
+    border-style: solid;
+
+    border-radius: 40px;
+}
+
+.outer {
+    display: table;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inner {
+    text-align: center;
+    width: auto;
+    padding: 0 15px;
+}
+
+#toLogin {
+    background: url("img/vertical_cloth.png") repeat left top;
+    height: 100%;
+    min-height: 400px;
+}
+
+#toLogin .login-wr {
+    position: relative;
+    margin: 0 auto;
+    background: #ecf0f1;
+    max-width: 350px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px #333;
+    padding: 15px;
+}
+
+#toLogin h2 {
+    text-align: center;
+    font-weight: 200;
+    font-size: 2em;
+    margin-top: 10px;
+    color: #34495e;
+}
+
+#toLogin .form {
+    padding-top: 20px;
+    text-align: center;
+}
+
+#toLogin input[type="text"], 
+#toLogin input[type="password"],
+#toLogin button {
+    width: 80%;
+    margin-bottom: 25px;
+    height: 40px;
+    border-radius: 5px;
+    outline: 0;
+    outline-style: none;
+}
+      
+#toLogin input[type="text"],
+#toLogin input[type="password"] {
+    border: 1px solid #bbb;
+    padding: 0 0 0 10px;
+    font-size: 14px;
+}
+
+#toLogin a {
+    text-align: center;
+    font-size: 12px;
+    color: #3498db;
+    cursor: pointer;
+}
+      
+#toLogin button {
+    background: #696969;
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 200;
+    cursor: pointer;
+    transition: box-shadow .4s ease;
+}
+
+#toRegister {
+    height: 100%;
+    min-height: 400px;
+    display: none;
+}
+
+#toRegister .register-wr {
+    position: relative;
+    margin: 0 auto;
+    background: #ecf0f1;
+    max-width: 350px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px #333;
+    padding: 15px;
+    max-height: 350px;
+    overflow: scroll;
+}
+
+#toRegister h2 {
+    text-align: center;
+    font-weight: 200;
+    font-size: 2em;
+    margin-top: 10px;
+    color: #34495e;
+}
+
+#toRegister .form {
+    padding-top: 20px;
+    text-align: center;
+}
+
+#toRegister input[type="text"],
+#toRegister input[type="tel"],
+#toRegister input[type="email"],
+#toRegister input[type="password"],
+#toRegister button {
+    width: 80%;
+    margin-bottom: 25px;
+    height: 40px;
+    border-radius: 5px;
+    outline: 0;
+    outline-style: none;
+}
+      
+#toRegister input[type="text"],
+#toRegister input[type="tel"],
+#toRegister input[type="email"],
+#toRegister input[type="password"] {
+    border: 1px solid #bbb;
+    padding: 0 0 0 10px;
+    font-size: 14px;
+}
+
+#toRegister a {
+    text-align: center;
+    font-size: 12px;
+    color: #3498db;
+    cursor: pointer;
+}
+      
+#toRegister button {
+    background: #696969;
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 200;
+    cursor: pointer;
+    transition: box-shadow .4s ease;
+}
+
+/* блок настройки скрола*/
+::-webkit-scrollbar-button {
+    background-image:url('');
+    background-repeat:no-repeat;
+    width:5px;
+    height:0px
+    }
+    
+    ::-webkit-scrollbar-track {
+    background-color:#ecedee
+    }
+    
+    ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    background-color:#a3a3a3;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover{
+    background-color:#5c5c5c;
+    }
+    
+    ::-webkit-resizer{
+    background-image:url('');
+    background-repeat:no-repeat;
+    width:4px;
+    height:0px
+    }
+    
+    ::-webkit-scrollbar{
+    width: 4px;
+    }

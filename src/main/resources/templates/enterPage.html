@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
 	<title>Меню входа</title>
-	<link rel="stylesheet" type="text/css" href="style_enterPage.css">
+<!--	<link rel="stylesheet" type="text/css" href="style_enterPage.css">-->
+	<link rel="stylesheet" type="text/css" href="./css/style_enterPage.css">
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -15,12 +16,25 @@
 					<div class="inner">
 						<div class="login-wr">
 							<h2>Вход</h2>
-							<div class="form">
-								<input type="text" placeholder="Пользователь">
-								<input type="password" placeholder="Пароль">
-								<button onclick="window.location.href='../gamePage/secondChanse (1).html';"> Авторизация </button>
-								<a onclick="toRegister();"><p> У вас нет аккаунта? Регистрация </p></a>
-							</div>
+							<form action="#" th:action="@{/enterPage}" method="post" th:object="${user}" >
+								<div class="form" >
+
+									<div th:if="${#fields.hasErrors('email')}" class="form-edit">
+										<span th:errors="*{email}" th:style="'color: red'">Generic Errors</span>
+									</div>
+									<input type="text" placeholder="Email" name="email" th:field="*{email}">
+
+
+									<div th:if="${#fields.hasErrors('password')}" class="form-edit">
+										<span th:errors="*{password}" th:style="'color: red'">Generic Errors</span>
+									</div>
+									<input type="password" placeholder="Пароль" name="password" th:field="*{password}">
+									<input type="hidden" name="action" value="isLogin">
+	<!--								<button onclick="window.location.href='../gamePage/secondChanse (1).html';"> Авторизация </button>-->
+									<button type="submit"> Авторизация </button>
+									<a onclick="toRegister();"><p> У вас нет аккаунта? Регистрация </p></a>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -32,15 +46,41 @@
 					<div class="inner">
 						<div class="register-wr">
 							<h2> Регистрация </h2>
-							<div class="form">
-								<input type="text" placeholder="ФИО">
-								<input type="email" placeholder="Ваш email">
-								<input type="password" placeholder="Пароль">
-								<input type="tel" placeholder="Телефон">
-								<input type="text" placeholder="Университет и направление">
-								<button onclick="window.location.href='../gamePage/secondChanse (1).html';"> Зарегистрироваться </button>
-								<a onclick="toLogin();"><p> У вас нет аккаунта? Регистрация </p></a>
-							</div>
+							<form action="#" th:action="@{/enterPage}" method="post" th:object="${user}">
+								<div class="form">
+
+									<div th:if="${#fields.hasErrors('name')}" class="form-edit">
+										<span th:errors="*{name}" th:style="'color: red'">Generic Errors</span>
+									</div>
+									<br><label th:style="'color: red'">* </label>
+									<input type="text" placeholder="Фамилия" th:field="*{name}" name="user">
+
+									<div th:if="${#fields.hasErrors('secondName')}" class="form-edit">
+										<span th:errors="*{secondName}" th:style="'color: red'">Generic Errors</span>
+									</div>
+									<br><label th:style="'color: red'">* </label>
+									<input type="text" placeholder="Имя" th:field="*{secondName}">
+									<input type="text" placeholder="Отчество" th:field="*{thirdName}">
+
+									<div th:if="${#fields.hasErrors('email')}" class="form-edit">
+										<span th:errors="*{email}" th:style="'color: red'">Generic Errors</span>
+									</div>
+									<br><label th:style="'color: red'">* </label>
+									<input type="email" placeholder="Ваш email" th:field="*{email}">
+
+									<div th:if="${#fields.hasErrors('password')}" class="form-edit">
+										<span th:errors="*{password}" th:style="'color: red'">Generic Errors</span>
+									</div>
+									<br><label th:style="'color: red'">* </label>
+									<input type="password" placeholder="пароль" th:field="*{password}" name="password">
+									<input type="tel" placeholder="Телефон" th:field="*{phone}">
+									<input type="text" placeholder="Университет и направление" th:field="*{info}">
+									<input type="hidden" name="action" value="isRegistration">
+	<!--								<button onclick="window.location.href='../gamePage/secondChanse (1).html';"> Зарегистрироваться </button>-->
+									<button type="submit"> Зарегистрироваться </button>
+									<a onclick="toLogin();"><p> У вас есть аккаунт? Вход </p></a>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -64,5 +104,7 @@
 	}
 
 </script>
+
+
 </body>
 </html>

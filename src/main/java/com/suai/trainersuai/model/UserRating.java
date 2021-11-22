@@ -1,10 +1,10 @@
-package com.suai.trainersuai.persistence.entities;
+package com.suai.trainersuai.model;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Users_results")
-public class User {
+public class UserRating {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,6 +19,14 @@ public class User {
 
     @Column(name = "Users_ssid")
     private long idRegistration;
+
+    public UserRating() {}
+
+    public UserRating(int stat, String level, long userId) {
+        this.stat = stat;
+        this.lvl = level;
+        this.idRegistration = userId;
+    }
 
     public Long getId() {
         return id;
@@ -51,6 +59,7 @@ public class User {
     public void setIdRegistration(long idRegistration) {
         this.idRegistration = idRegistration;
     }
+
 
     @Override
     public String toString() {
