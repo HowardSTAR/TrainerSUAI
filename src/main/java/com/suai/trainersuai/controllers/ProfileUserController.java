@@ -26,34 +26,25 @@ public class ProfileUserController {
             System.out.println( "Вход не выполнен");
             return "redirect:/enterPage";
         }
-
         User user = userService.getUserById(authUserId());
         userName = user.getName() + " " + user.getSecondName();
-
         model.addAttribute("user", user);
         model.addAttribute("userName", userName);
-
         return "profilePage";
     }
 
     @PostMapping("/profilePage")
     public String edtiFormUserChange(User user,
                                      Model model,
-                                    @RequestParam("exit") String exit) {
-
-        if (exit.equals("exit")) {
+                                    @RequestParam("action") String action) {
+        if (action.equals("exit")) {
             return "redirect:/exit";
         }
-
-        user.setId(authUserId());
-
         userName = user.getName() + " " + user.getSecondName();
         model.addAttribute("userName", userName);
-
         if (userService.save(user).equals(null)) {
             return "enterPage";
         }
-
         return "profilePage";
     }
 

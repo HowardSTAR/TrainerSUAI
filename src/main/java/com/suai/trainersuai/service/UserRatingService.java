@@ -28,7 +28,6 @@ public class UserRatingService {
         authUserId();
         int resultProcent = Math.round(result * 100);
         UserRating userResult = new UserRating(resultProcent, null, authUserId());
-
         return repositoryResult.save(userResult);
     }
 
@@ -37,10 +36,8 @@ public class UserRatingService {
         List<UserRating> users = repositoryResult.findAll();
         List<UserToRating> userRating = new ArrayList<>();
         Map<Long, Integer> map = getMapRating(users);
-
         User userTemp;
         UserRating userRatingTemp;
-
         for (Map.Entry<Long, Integer> entry : map.entrySet()) {
             userTemp = serviceUser.getUserById(entry.getKey());
             userRating.add(new UserToRating(
@@ -50,16 +47,13 @@ public class UserRatingService {
                     entry.getValue()
             ));
         }
-
         Collections.sort(userRating, Comparator.comparing(UserToRating::getRating).reversed());
-
         return userRating;
     }
 
 //    получение Map <idUser, max - рейтинг>
     private Map<Long, Integer> getMapRating(List<UserRating> users) {
         Map<Long, Integer> map = new LinkedHashMap<>();
-
         for (UserRating us : users) {
             try {
                 int value = map.get(us.getIdRegistration());
@@ -71,7 +65,6 @@ public class UserRatingService {
                 map.put(us.getIdRegistration(), us.getStat());
             }
         }
-
         return map;
     }
 

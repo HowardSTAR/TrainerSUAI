@@ -48,7 +48,6 @@ public class UserRating {
     public UserRating(long id, int stat, long userId) {
         this.id = id;
         this.stat = stat;
-//        this.lvl = level;
         this.idRegistration = userId;
     }
 
@@ -83,7 +82,6 @@ public class UserRating {
     public void setIdRegistration(long idRegistration) {
         this.idRegistration = idRegistration;
     }
-
 
     @Override
     public String toString() {

@@ -103,7 +103,6 @@ public class RegistrationController {
         redirectAttributes.getFlashAttributes().clear();
         redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.customer", bindingResult);
         redirectAttributes.addFlashAttribute("user", user);
-
         return redirectAttributes;
     }
 

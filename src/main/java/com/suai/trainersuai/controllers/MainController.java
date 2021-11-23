@@ -35,10 +35,9 @@ public class MainController {
         return "index";
     }
 
-
     @GetMapping("/secondChance")
-    public String reaction (Model model) {
-
+    public String reaction (Model model
+    ) {
         if (authUserId() == 0) {
 //           Вход не выполнен
             return "redirect:/enterPage";
@@ -46,15 +45,15 @@ public class MainController {
         User user = userService.getUserById(authUserId());
         userName = user.getName() + " " + user.getSecondName();
         model.addAttribute("userName", userName);
-
+        System.out.println("RESULT GET: "+user);
         return "secondChance";
     }
 
     @PostMapping("/secondChance")
-    public String getResult(@RequestParam(value = "myPostVar") Float myPostVar) throws ParseException {
-
-        UserRating userResult = ratingService.saveResult(myPostVar);
-
+    public String getResult(@RequestParam(value = "resultGame") Float resultGame) throws ParseException {
+        UserRating userResult = ratingService.saveResult(resultGame);
+        System.out.println("RESULT POST: "+userResult);
+        System.out.println("myPostVar = "+resultGame);
         return "redirect:";
     }
 
@@ -72,13 +71,11 @@ public class MainController {
         userName = user.getName() + " " + user.getSecondName();
         model.addAttribute("userRating", userRating);
         model.addAttribute("userName", userName);
-
         return "leaderBoardPage";
     }
 
 @GetMapping("/aboutUs")
     public String aboutUs() {
-
         return "aboutUs";
 }
 

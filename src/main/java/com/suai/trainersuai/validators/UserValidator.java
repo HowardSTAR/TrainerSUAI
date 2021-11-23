@@ -8,7 +8,6 @@ import org.springframework.validation.ValidationUtils;
 
 @Component
 public class UserValidator implements Validator {
-
     @Override
     public boolean supports(Class<?> aClass) {
         return User.class.isAssignableFrom(aClass);
@@ -17,7 +16,6 @@ public class UserValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         User user = (User) target;
-
         ValidationUtils.rejectIfEmpty(errors, "email", "error.email", "Введите Email");
         ValidationUtils.rejectIfEmpty(errors, "password", "error.password", "Введите пароль");
         ValidationUtils.rejectIfEmpty(errors, "name", "error.name", "Введите фамилию");

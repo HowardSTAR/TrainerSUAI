@@ -23,27 +23,26 @@ public class UserService {
 
     @Transactional
     public User save(User user) {
-
             if (user.isNew()) {
 //                save User
                 em.persist(user);
-//                setAuthUserId(user.getId());
                 return user;
             } else {
 //                update User
                 try {
                     user.setPassword(getUserById(authUserId()).getPassword());
+
+                    System.out.println("UPDATE: user = "+user.getPassword()+"  authUser = "+authUserId());
+
                     return em.merge(user);
                 } catch (NullPointerException e) {
                     return null;
                 }
-
             }
     }
 
     public User getByEmail(String email) {
         User userGet = repository.findByEmail(email);
-//        setAuthUserId(userGet.getId());
         return userGet;
     }
 

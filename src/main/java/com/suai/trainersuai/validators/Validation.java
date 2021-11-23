@@ -12,7 +12,6 @@ public class Validation {
 
     @Autowired
     private UserService service;
-
     //    проверка пароля пользователя - login
     public boolean isLoginUserPassword(String email, String password) {
         User userGet = service.getByEmail(email);
@@ -22,11 +21,8 @@ public class Validation {
         }
         return false;
     }
-
-
     //    проверка пользователя по email - login
     public boolean isLoginUserEmail(String email) {
-
         try {
             if (service.getByEmail(email).getEmail().equals(email)) {
                 return true;
@@ -37,6 +33,4 @@ public class Validation {
             return false;
         }
     }
-
-
 }
