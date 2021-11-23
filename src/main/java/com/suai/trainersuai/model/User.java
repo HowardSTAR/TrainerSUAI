@@ -4,6 +4,7 @@ import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Reg_inf", uniqueConstraints = {
@@ -62,6 +63,18 @@ public class User {
     }
 
     public User(String name, String secondName, String thirdName, String email, String phone, String info, String avatar, String password) {
+        this.name = name;
+        this.secondName = secondName;
+        this.thirdName = thirdName;
+        this.email = email;
+        this.phone = phone;
+        this.info = info;
+        this.avatar = avatar;
+        this.password = password;
+    }
+
+    public User(long id, String name, String secondName, String thirdName, String email, String phone, String info, String avatar, String password) {
+        this.id = id;
         this.name = name;
         this.secondName = secondName;
         this.thirdName = thirdName;
@@ -148,4 +161,24 @@ public class User {
         return id == null;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) &&
+                Objects.equals(name, user.name) &&
+                Objects.equals(secondName, user.secondName) &&
+                Objects.equals(thirdName, user.thirdName) &&
+                email.equals(user.email) &&
+                Objects.equals(phone, user.phone) &&
+                Objects.equals(info, user.info) &&
+                Objects.equals(avatar, user.avatar) &&
+                Objects.equals(password, user.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, secondName, thirdName, email, phone, info, avatar, password);
+    }
 }

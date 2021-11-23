@@ -41,7 +41,7 @@ body {
 
 }
 
-.profile, .leaderBoard, .aboutUs {
+.game, .profile, .leaderBoard {
     margin: 0px 20px;
     color: dimgrey;
     padding-top: 0px;
@@ -51,7 +51,8 @@ body {
     text-align: center;
     text-decoration: none;
 }
-.game {
+/* !!!!!    */
+.aboutUs {
     margin: 0px 20px;
     color: black;
     padding-top: 0px;
@@ -126,39 +127,6 @@ body {
     display:inline-block;
 }
 
-/*Результат*/
-
-.result {
-    display: none;
-
-    position: absolute;
-
-    margin-left: 203.5px;
-    margin-top: 150px;
+.info {
+    margin-top: 50px;
 }
-
-.result_title {
-    display: none;
-
-    text-transform: uppercase;
-    font-size: 30px;
-    font-weight: bold;
-}
-
-.score {
-    text-transform: uppercase;
-
-    font-size: 25px;
-    font-weight: bold;
-}
-
-#score_p {
-    text-align: center;
-    margin: 0;
-}
-
-#result_title_p {
-    text-align: center;
-}
-
-

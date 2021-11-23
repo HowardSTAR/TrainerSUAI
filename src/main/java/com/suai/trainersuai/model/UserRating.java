@@ -1,6 +1,7 @@
 package com.suai.trainersuai.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Users_results")
@@ -25,6 +26,29 @@ public class UserRating {
     public UserRating(int stat, String level, long userId) {
         this.stat = stat;
         this.lvl = level;
+        this.idRegistration = userId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserRating that = (UserRating) o;
+        return stat == that.stat &&
+                idRegistration == that.idRegistration &&
+                Objects.equals(id, that.id) &&
+                Objects.equals(lvl, that.lvl);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, stat, lvl, idRegistration);
+    }
+
+    public UserRating(long id, int stat, long userId) {
+        this.id = id;
+        this.stat = stat;
+//        this.lvl = level;
         this.idRegistration = userId;
     }
 

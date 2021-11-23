@@ -2,7 +2,8 @@ package com.suai.trainersuai.controllers;
 
 import com.suai.trainersuai.model.User;
 import com.suai.trainersuai.service.UserService;
-import com.suai.trainersuai.validators.UserValidaotr;
+import com.suai.trainersuai.validators.UserValidator;
+import com.suai.trainersuai.validators.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -18,14 +19,17 @@ import static com.suai.trainersuai.util.SecurityUtil.*;
 public class RegistrationController {
 
     @Autowired
-    private UserValidaotr userValidaotr;
+    private UserValidator userValidator;
+
+    @Autowired
+    private Validation validation;
 
     @Autowired
     private UserService userService;
 
     @InitBinder
     private void initBinder(WebDataBinder binder) {
-        binder.setValidator(userValidaotr);
+        binder.setValidator(userValidator);
     }
 
     @GetMapping("/enterPage")
@@ -49,7 +53,7 @@ public class RegistrationController {
                     addToredirectAttributes(bindingResult, redirectAttributes, user);
                     return "enterPage";
                 }
-                userService.save(user);
+                setAuthUserId(userService.save(user).getId());
             } catch (Exception e) {
                 bindingResult.rejectValue("email", "error.email", "Такой Email уже существует");
                 if (bindingResult.hasErrors()) {
@@ -61,9 +65,10 @@ public class RegistrationController {
 //            LOGIN
             if (!email.isEmpty() &&
                 !password.isEmpty() &&
-                userService.isLoginUserEmail(email)) {
-                if (userService.isLoginUserPassword(email, password)) {
-                    return "redirect:/reaction_game";
+                validation.isLoginUserEmail(email)) {
+                if (validation.isLoginUserPassword(email, password)) {
+                    setAuthUserId(userService.getByEmail(email).getId());
+                    return "redirect:/secondChance";
                 } else {
                     bindingResult.rejectValue("password", "error.password", "Неверный пароль");
                     addToredirectAttributes(bindingResult, redirectAttributes, user);
@@ -71,7 +76,7 @@ public class RegistrationController {
                 }
             } else {
                 if (!email.isEmpty() &&
-                    !userService.isLoginUserEmail(email)) {
+                    !validation.isLoginUserEmail(email)) {
                     bindingResult.rejectValue("email", "error.email", "Такого пользователя не существует");
                     addToredirectAttributes(bindingResult, redirectAttributes, user);
                     return "enterPage";
@@ -81,7 +86,7 @@ public class RegistrationController {
                 }
             }
         }
-            return "redirect:/reaction_game";
+            return "redirect:/secondChance";
     }
 
 //  Выход из профиля

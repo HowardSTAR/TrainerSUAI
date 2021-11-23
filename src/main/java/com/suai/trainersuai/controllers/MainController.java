@@ -36,7 +36,7 @@ public class MainController {
     }
 
 
-    @GetMapping("/reaction_game")
+    @GetMapping("/secondChance")
     public String reaction (Model model) {
 
         if (authUserId() == 0) {
@@ -47,10 +47,10 @@ public class MainController {
         userName = user.getName() + " " + user.getSecondName();
         model.addAttribute("userName", userName);
 
-        return "reaction_game";
+        return "secondChance";
     }
 
-    @PostMapping("/reaction_game")
+    @PostMapping("/secondChance")
     public String getResult(@RequestParam(value = "myPostVar") Float myPostVar) throws ParseException {
 
         UserRating userResult = ratingService.saveResult(myPostVar);
@@ -58,7 +58,7 @@ public class MainController {
         return "redirect:";
     }
 
-    @GetMapping("/rating")
+    @GetMapping("/leaderBoardPage")
     public String rating(Model model) {
 
         if (authUserId() == 0) {
@@ -66,15 +66,20 @@ public class MainController {
             return "redirect:/enterPage";
         }
 
-        List<UserToRating> userRating = ratingService.getAllRating();
+        List<UserToRating> userRating = ratingService.getAllMaxRating();
+
         User user = userService.getUserById(authUserId());
         userName = user.getName() + " " + user.getSecondName();
         model.addAttribute("userRating", userRating);
         model.addAttribute("userName", userName);
 
-        return "rating";
+        return "leaderBoardPage";
     }
 
+@GetMapping("/aboutUs")
+    public String aboutUs() {
 
+        return "aboutUs";
+}
 
 }

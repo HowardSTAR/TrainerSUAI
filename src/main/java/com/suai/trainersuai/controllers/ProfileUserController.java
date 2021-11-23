@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import static com.suai.trainersuai.util.SecurityUtil.authUserId;
 
@@ -18,11 +19,11 @@ public class ProfileUserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/editFormUser")
+    @GetMapping("/profilePage")
     public String editFormUser(Model model) {
 
         if (authUserId() == 0) {
-//            "Вход не выполнен"
+            System.out.println( "Вход не выполнен");
             return "redirect:/enterPage";
         }
 
@@ -32,20 +33,28 @@ public class ProfileUserController {
         model.addAttribute("user", user);
         model.addAttribute("userName", userName);
 
-        return "editFormUser";
+        return "profilePage";
     }
 
-    @PostMapping("/editFormUser")
-    public String edtiFormUserChange(User user, Model model) {
+    @PostMapping("/profilePage")
+    public String edtiFormUserChange(User user,
+                                     Model model,
+                                    @RequestParam("exit") String exit) {
+
+        if (exit.equals("exit")) {
+            return "redirect:/exit";
+        }
 
         user.setId(authUserId());
 
         userName = user.getName() + " " + user.getSecondName();
         model.addAttribute("userName", userName);
 
-        userService.save(user);
+        if (userService.save(user).equals(null)) {
+            return "enterPage";
+        }
 
-        return "editFormUser";
+        return "profilePage";
     }
 
 }

@@ -8,10 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.suai.trainersuai.util.SecurityUtil.authUserId;
 
@@ -30,11 +28,12 @@ public class UserRatingService {
         authUserId();
         int resultProcent = Math.round(result * 100);
         UserRating userResult = new UserRating(resultProcent, null, authUserId());
+
         return repositoryResult.save(userResult);
     }
 
 //    получение списка объектов UserToRating включающих всех пользователей с максимальным рейтингом
-    public List<UserToRating> getAllRating() {
+    public List<UserToRating> getAllMaxRating() {
         List<UserRating> users = repositoryResult.findAll();
         List<UserToRating> userRating = new ArrayList<>();
         Map<Long, Integer> map = getMapRating(users);
@@ -52,17 +51,19 @@ public class UserRatingService {
             ));
         }
 
+        Collections.sort(userRating, Comparator.comparing(UserToRating::getRating).reversed());
+
         return userRating;
     }
 
 //    получение Map <idUser, max - рейтинг>
     private Map<Long, Integer> getMapRating(List<UserRating> users) {
-        Map<Long, Integer> map = new HashMap<>();
+        Map<Long, Integer> map = new LinkedHashMap<>();
 
         for (UserRating us : users) {
             try {
                 int value = map.get(us.getIdRegistration());
-                System.out.println("value = " +value);
+//                System.out.println("value = " +value);
                 if (value <= us.getStat()) {
                     map.put(us.getIdRegistration(), us.getStat());
                 }
@@ -70,6 +71,7 @@ public class UserRatingService {
                 map.put(us.getIdRegistration(), us.getStat());
             }
         }
+
         return map;
     }
 

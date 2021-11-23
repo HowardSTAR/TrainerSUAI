@@ -1,5 +1,7 @@
 package com.suai.trainersuai.to;
 
+import java.util.Objects;
+
 public class UserToRating {
 
     private String firstName;
@@ -56,5 +58,21 @@ public class UserToRating {
                 ", thirdName='" + thirdName + '\'' +
                 ", rating=" + rating +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserToRating that = (UserToRating) o;
+        return rating == that.rating &&
+                Objects.equals(firstName, that.firstName) &&
+                Objects.equals(secondName, that.secondName) &&
+                Objects.equals(thirdName, that.thirdName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, secondName, thirdName, rating);
     }
 }

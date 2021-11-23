@@ -1,4 +1,10 @@
 CREATE DATABASE IF NOT EXISTS SUAI_Circles;
+
+-- для тестов
+# DROP TABLE Users_results;
+# DROP TABLE Reg_inf;
+--
+
 USE SUAI_Circles;
  CREATE TABLE IF NOT EXISTS Reg_inf
 (

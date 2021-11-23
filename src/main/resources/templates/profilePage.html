@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Форма редактирования</title>
+        <link rel="stylesheet" type="text/css" href="./css/style_profilePage.css">
+<!--        <link rel="stylesheet" type="text/css" href="../static/css/style_profilePage.css">-->
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="timer" id="timer">10</div>
+<div class="container_for_game">
+    <div class="border"><!--Поле игры-->
+        <div class="header" id="header"> <!--сделал правильную линию бордер в блоке хедер, в следующий раз нужно добавлять меню в хедер через <button onclick="window.location.href='../gamePage/secondChanse.html';"> Авторизация </button>, а так же следать так, чтобы при нажатии кнопки играть это меню убиралось-->
+            <nav class="menu">
+                <ul>
+<!--                    <a class="game" href="C:\Users\79312\Desktop\Игра на реакцию\Front\Main\gamePage\secondChanse (1).html"> Игра </a><a class="profile" href="C:\Users\79312\Desktop\Игра на реакцию\Front\Main\profilePage\profilePage.html"> Личный кабинет </a><a class="leaderBoard" href="C:\Users\79312\Desktop\Игра на реакцию\Front\Main\leaderBoardPage\leaderBoardPage.html"> личный кабинет лидеров </a><a class="aboutUs" href="C:\Users\79312\Desktop\Игра на реакцию\Front\Main\aboutUsPage\aboutUs.html"> О нас </a>-->
+                    <a class="game" href="/secondChance"> Игра </a>
+                    <a class="profile" href="/profilePage"> Личный кабинет </a>
+                    <a class="leaderBoard" href="/leaderBoardPage"> Таблица лидеров </a>
+                    <a class="aboutUs" href="/aboutUs"> О нас </a>
+
+                </ul>
+            </nav>
+            <div class="profile">
+                <!--                    Тут будет быть личный кабинет &#45;&#45;  Тут будет быть личный кабинет &#45;&#45;  Тут будет быть личный кабинет &#45;&#45;  Тут будет быть личный кабинет &#45;&#45;  Тут будет быть личный кабинет &#45;&#45;  Тут будет быть личный кабинет &#45;&#45;  Тут будет быть личный кабинет &#45;&#45;  Тут будет быть личный кабинет &#45;&#45;  Тут будет быть личный кабинет &#45;&#45;  Тут будет быть личный кабинет &#45;&#45;  Тут будет быть личный кабинет &#45;&#45;  Тут будет быть личный кабинет &#45;&#45;  Тут будет быть личный кабинет &#45;&#45;  Тут будет быть личный кабинет &#45;&#45;  Тут будет быть личный кабинет &#45;&#45;  Тут будет быть личный кабинет &#45;&#45;  Тут будет быть личный кабинет &#45;&#45;  Тут будет быть личный кабинет &#45;&#45;  Тут будет быть личный кабинет &#45;&#45;  Тут будет быть личный кабинет &#45;&#45;  Тут будет быть личный кабинет &#45;&#45;  Тут будет быть личный кабинет &#45;&#45;  Тут будет быть личный кабинет &#45;&#45;  -->
+<!--                <h4> Форма редактирования </h4>-->
+                <form method="post">
+                    <div th:object="${user}"  class="form">
+                        <label >фамилия
+                        <input type="text" th:field="*{name}"></label>
+                        <br><label>имя
+                        <input type="text" th:field="*{secondName}"></label>
+                        <br><label>отчество
+                            <input type="text" th:field="*{thirdName}"></label>
+                        <br><label>email
+                            <input type="email" th:field="*{email}"></label>
+                        <br><label>пароль
+                            <input type="password" th:field="*{password}" placeholder="изменить пароль"></label>
+                        <br><label>телефон
+                            <input type="tel" th:field="*{phone}"></label>
+                        <br><label>университет и направление
+                            <input type="text" th:field="*{info}"></label>
+                        <br><button type="submit"> Изменить </button>
+                        <button type="submit" name="exit" value="exit"> Выход </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div><!--Граница-->
+</div><!--Контейнер для игры-->
+
+</body>
+</html>

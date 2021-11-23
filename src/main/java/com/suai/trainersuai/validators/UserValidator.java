@@ -7,8 +7,7 @@ import org.springframework.validation.Validator;
 import org.springframework.validation.ValidationUtils;
 
 @Component
-public class UserValidaotr implements Validator {
-
+public class UserValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> aClass) {
