@@ -1,12 +1,13 @@
-CREATE DATABASE IF NOT EXISTS SUAI_Circles;
-
--- для тестов
-# DROP TABLE Users_results;
-# DROP TABLE Reg_inf;
---
+# CREATE DATABASE IF NOT EXISTS SUAI_Circles;
 
 USE SUAI_Circles;
- CREATE TABLE IF NOT EXISTS Reg_inf
+
+-- для тестов
+DROP TABLE IF EXISTS Users_results;
+DROP TABLE IF EXISTS Reg_inf;
+--
+
+CREATE TABLE IF NOT EXISTS Reg_inf
 (
 
     Users_ssid INT PRIMARY KEY AUTO_INCREMENT,	-- Уникальный ID пользователя --
@@ -26,6 +27,6 @@ CREATE TABLE IF NOT EXISTS Users_results
     Player_statistics INT,			-- Статистика нажатия на круги (число процентов) --
     Game_difficulty_lvl VARCHAR(20),		-- Уровень сложности игры --
     Users_ssid INT,
-	FOREIGN KEY (Users_ssid) REFERENCES Reg_inf (Users_ssid) ON DELETE SET NULL ON UPDATE CASCADE
+    FOREIGN KEY (Users_ssid) REFERENCES Reg_inf (Users_ssid) ON DELETE SET NULL ON UPDATE CASCADE
 
 );
