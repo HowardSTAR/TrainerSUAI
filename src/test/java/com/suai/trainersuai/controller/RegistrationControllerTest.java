@@ -17,7 +17,6 @@ class RegistrationControllerTest {
     @Test
     void registrationEterPage() {
         RegistrationController registrationController = new RegistrationController();
-//        String result = registrationController.enterPageLoad(USER_SAVE_NEW);
         String result = registrationController.registrationEterPage(USER_SAVE_NEW,
                 null, "user1@mail.ru", "123", REGISTRATION, REDIRECT_ATTRIBUTES);
         System.out.println("result = " + result);

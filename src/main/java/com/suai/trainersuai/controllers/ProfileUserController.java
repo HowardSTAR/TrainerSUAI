@@ -23,7 +23,6 @@ public class ProfileUserController {
     public String editFormUser(Model model) {
 
         if (authUserId() == 0) {
-            System.out.println( "Вход не выполнен");
             return "redirect:/enterPage";
         }
         User user = userService.getUserById(authUserId());
